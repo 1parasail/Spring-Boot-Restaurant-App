@@ -55,7 +55,7 @@
     <h3>Name your creation:</h3>
     <input type="text" th:field="*{name}"/>
     <br/>
-    <button>Submit Your Order</button>
+    <a th:href="@{/orders/current}" class="btn">Submit Your Order</a>
   </div>
 </form>
 </body>
