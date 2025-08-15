@@ -11,6 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
 import dumplings.User;
+import dumplings.data.UserRepository;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
