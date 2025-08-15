@@ -1,18 +1,23 @@
 package dumplings.web;
 
-import dumplings.Dumpling;
-import dumplings.DumplingOrder;
-import dumplings.Ingredient;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import dumplings.Ingredient.Type;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import jakarta.validation.Valid;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import lombok.extern.slf4j.Slf4j;
+import dumplings.Ingredient;
+import dumplings.Ingredient.Type;
+import dumplings.Dumpling;
+import dumplings.DumplingOrder;
 
 @Slf4j
 @Controller
@@ -64,8 +69,13 @@ public class DesignDumplingController {
     }
 
     @PostMapping
-    public String processDumpling(Dumpling dumpling,
+    public String processDumpling(@Valid Dumpling dumpling, Errors errors,
                               @ModelAttribute DumplingOrder dumplingOrder) {
+
+        if (errors.hasErrors()) {
+            return "design";
+        }
+
         dumplingOrder.addDumpling(dumpling);
         log.info("Processing taco: {}", dumpling);
         return "redirect:/orders/current";
