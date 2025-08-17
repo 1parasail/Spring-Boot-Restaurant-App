@@ -21,6 +21,9 @@ public class DumplingOrder {
     private Long id;
     private Date placedAt = new Date();
 
+    @ManyToOne
+    private User user;
+
     @NotBlank(message="Delivery name is required")
     private String deliveryName;
     @NotBlank(message="Street is required")
