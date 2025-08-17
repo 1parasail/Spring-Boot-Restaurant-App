@@ -37,7 +37,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/h2-console/**").permitAll()
-                        .requestMatchers("/design", "/orders").hasRole("USER")
+                        .requestMatchers("/design", "/orders/**").hasRole("USER")
                         .requestMatchers("/", "/**").permitAll())
                 .formLogin(form -> form.loginPage("/login").permitAll())
                 .logout(logout -> logout.logoutUrl("/logout"))
