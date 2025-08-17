@@ -40,6 +40,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                         .requestMatchers("/design", "/orders").hasRole("USER")
                         .requestMatchers("/", "/**").permitAll())
                 .formLogin(form -> form.loginPage("/login").permitAll())
+                .logout(logout -> logout.logoutUrl("/logout"))
                 .build();
     }
 
