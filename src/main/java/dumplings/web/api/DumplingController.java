@@ -4,10 +4,11 @@ import dumplings.Dumpling;
 import dumplings.data.DumplingRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
 @RequestMapping(path="/api/dumplings", produces = "application/json")
@@ -25,6 +26,12 @@ public class DumplingController {
     {
         PageRequest page = PageRequest.of(0, 10, Sort.by("createdAt").descending());
         return dumplingRepository.findAll(page).getContent();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Dumpling> dumplingById (@PathVariable("id") Long id)
+    {
+        return dumplingRepository.findById(id);
     }
 
 
