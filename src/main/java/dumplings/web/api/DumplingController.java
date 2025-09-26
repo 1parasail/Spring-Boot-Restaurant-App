@@ -4,6 +4,7 @@ import dumplings.Dumpling;
 import dumplings.data.DumplingRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -34,6 +35,11 @@ public class DumplingController {
         return dumplingRepository.findById(id);
     }
 
-
+    @PostMapping(consumes="application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Dumpling createDumpling (@RequestBody Dumpling dumpling)
+    {
+        return dumplingRepository.save(dumpling);
+    }
 
 }
