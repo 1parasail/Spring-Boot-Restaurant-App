@@ -1,6 +1,7 @@
 package dumplings.web.api;
 
 import dumplings.Dumpling;
+import dumplings.data.DumplingRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,11 +20,13 @@ public class DumplingController {
         this.dumplingRepository = dumplingRepository;
     }
 
-   /* @GetMapping(param = "recent")
+   @GetMapping(params="recent")
     public Iterable<Dumpling> recentsDumplings()
     {
-        PageRequest pageRequest = PageRequest.of(0, 10, Sort.by("createdAt").descending());
-        return dumplingRepository.findAll(pageRequest).getContent();
+        PageRequest page = PageRequest.of(0, 10, Sort.by("createdAt").descending());
+        return dumplingRepository.findAll(page).getContent();
     }
-    */
+
+
+
 }
